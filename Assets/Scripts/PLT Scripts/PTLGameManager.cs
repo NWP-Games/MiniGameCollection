@@ -71,7 +71,6 @@ public class PTLGameManager : MonoBehaviour
     {
         gameOver = true;
         lockpick.gameObject.SetActive(false);
-        Debug.Log("Game Over");
     }
 
     public bool GetGameOver() { return gameOver; }
