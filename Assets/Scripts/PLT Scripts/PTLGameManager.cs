@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PTLGameManager : MonoBehaviour
@@ -13,7 +14,8 @@ public class PTLGameManager : MonoBehaviour
     [SerializeField] private int lives = 3;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI livesText;
-    [SerializeField] private bool gameOver = false;
+    [SerializeField] private bool gameGoing = false;
+    [SerializeField] private GameObject restartButton;
 
     private void Start()
     {
@@ -25,7 +27,9 @@ public class PTLGameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!gameOver && Input.GetKeyDown(KeyCode.Space))
+        if (!gameGoing) return;
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject currentUnlockPoint = lockpick.GetCurrentUnlockPoint();
             if (currentUnlockPoint != null)
@@ -54,6 +58,7 @@ public class PTLGameManager : MonoBehaviour
     {
         points++;
         scoreText.text = "Score: " + points;
+        lockpick.IncreaseSpeed();
     }
 
     private void Damage()
@@ -69,9 +74,34 @@ public class PTLGameManager : MonoBehaviour
 
     private void GameOver()
     {
-        gameOver = true;
+        gameGoing = false;
+        lockpick.SetGameGoing(gameGoing);
         lockpick.gameObject.SetActive(false);
+        restartButton.SetActive(true);
+
+        GameObject[] allActiveGameObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+        foreach (GameObject gameObject in allActiveGameObjects)
+        {
+            if (gameObject.name.Contains("UnlockPoint")) gameObject.IsDestroyed();
+        }
     }
 
-    public bool GetGameOver() { return gameOver; }
+    public void StartGame()
+    {
+        gameGoing = true;
+        lockpick.gameObject.SetActive(true);
+        lockpick.gameObject.transform.rotation = new Quaternion (0, 0, 0, 0);
+        lockpick.gameObject.transform.position = new Vector3(0, 2.75f, 0);
+        lockpick.SetGameGoing(gameGoing);
+        Vector3 spawnLocation = new Vector3(0, 2.75f, 0);
+        Instantiate(unlockPoint, spawnLocation, Quaternion.identity);
+        spawnLocation = new Vector3(2.75f, 0, 0);
+        Instantiate(unlockPoint, spawnLocation, Quaternion.identity);
+        spawnLocation = new Vector3(-2.75f, 0, 0);
+        Instantiate(unlockPoint, spawnLocation, Quaternion.identity);
+        spawnLocation = new Vector3(0, -2.75f, 0);
+        Instantiate(unlockPoint, spawnLocation, Quaternion.identity);
+        lives = 3;
+        points = 0;
+    }
 }

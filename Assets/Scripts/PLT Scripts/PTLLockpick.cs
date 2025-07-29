@@ -8,6 +8,7 @@ public class PTLLockpick : MonoBehaviour
     [SerializeField] private float rotationSpeed = 20.0f;
     [SerializeField] private CapsuleCollider2D capsuleCollider;
     [SerializeField] private GameObject currentUnlockPoint;
+    [SerializeField] private bool gameGoing = false;
 
     private void Start()
     {
@@ -16,6 +17,8 @@ public class PTLLockpick : MonoBehaviour
 
     private void Update()
     {
+        if (!gameGoing) return;
+
         LockpickRotation();
 
         if(Input.GetKeyDown(KeyCode.Space))
@@ -40,5 +43,11 @@ public class PTLLockpick : MonoBehaviour
     }
 
     public GameObject GetCurrentUnlockPoint() { return currentUnlockPoint; }
+
+    public void SetGameGoing(bool gameGoing) { this.gameGoing = gameGoing; }
+
+    public void IncreaseSpeed() { rotationSpeed += 1f; }
+
+    public void ResetSpeed() { rotationSpeed = 20.0f; }
     
 }
