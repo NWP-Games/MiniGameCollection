@@ -36,12 +36,12 @@ public class PTLLockpick : MonoBehaviour
     {
         currentUnlockPoint = collision.gameObject;
     }
-
+    /*
     private void OnTriggerExit2D(Collider2D collision)
     {
         currentUnlockPoint = null;
     }
-
+    */
     public GameObject GetCurrentUnlockPoint() { return currentUnlockPoint; }
 
     public void SetGameGoing(bool gameGoing) { this.gameGoing = gameGoing; }

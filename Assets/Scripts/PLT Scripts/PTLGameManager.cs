@@ -16,6 +16,7 @@ public class PTLGameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private bool gameGoing = false;
     [SerializeField] private GameObject restartButton;
+    [SerializeField] private GameObject pauseScreen;
 
     private void Start()
     {
@@ -27,12 +28,18 @@ public class PTLGameManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if(gameGoing) PauseGame();
+            else UnpauseGame();
+        }
+
         if (!gameGoing) return;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject currentUnlockPoint = lockpick.GetCurrentUnlockPoint();
-            if (currentUnlockPoint != null)
+            if (CheckLockpickPosition())
             {
                 Destroy(currentUnlockPoint);
                 SpawnUnlockPoint();
@@ -45,13 +52,43 @@ public class PTLGameManager : MonoBehaviour
         }
     }
 
-    private void SpawnUnlockPoint()
+    private bool CheckLockpickPosition()
+    {
+        CapsuleCollider2D capsuleCollider = lockpick.GetComponent<CapsuleCollider2D>();
+        if (capsuleCollider != null)
+        {
+            ContactFilter2D filter = new ContactFilter2D().NoFilter();
+            CapsuleCollider2D[] results = new CapsuleCollider2D[1]; // Array to store results
+
+            if (capsuleCollider.OverlapCollider(filter, results) > 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void SpawnUnlockPoint()
     {
         float angle = Random.Range(0f, 2 * Mathf.PI);
         float x = radius * Mathf.Cos(angle);
         float y = radius * Mathf.Sin(angle);
         Vector3 spawnLocation = new Vector3(x, y, 0);
-        Instantiate(unlockPoint, spawnLocation, Quaternion.identity);
+        GameObject newUnlockPoint = Instantiate(unlockPoint, spawnLocation, Quaternion.identity);
+
+        CircleCollider2D circleCollider = newUnlockPoint.GetComponent<CircleCollider2D>();
+        if(circleCollider != null)
+        {
+            ContactFilter2D filter = new ContactFilter2D().NoFilter();
+            CircleCollider2D[] results = new CircleCollider2D[1]; // Array to store results
+
+            if (circleCollider.OverlapCollider(filter, results) > 0)
+            {
+                Destroy(newUnlockPoint);
+                SpawnUnlockPoint();
+            }
+        }
     }
 
     private void Score()
@@ -82,7 +119,10 @@ public class PTLGameManager : MonoBehaviour
         GameObject[] allActiveGameObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
         foreach (GameObject gameObject in allActiveGameObjects)
         {
-            if (gameObject.name.Contains("UnlockPoint")) gameObject.IsDestroyed();
+            if (gameObject.name.Contains("Unlock"))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -103,5 +143,23 @@ public class PTLGameManager : MonoBehaviour
         Instantiate(unlockPoint, spawnLocation, Quaternion.identity);
         lives = 3;
         points = 0;
+        lockpick.ResetSpeed();
+    }
+
+    public void PauseGame()
+    {
+        gameGoing = false;
+        lockpick.SetGameGoing(gameGoing);
+        pauseScreen.SetActive(true);
+    }
+
+    public void UnpauseGame()
+    {
+        pauseScreen.SetActive(false);
+        if(lives > 0)
+        {
+            gameGoing = true;
+            lockpick.SetGameGoing(gameGoing);
+        }
     }
 }
