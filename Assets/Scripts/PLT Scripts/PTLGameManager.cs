@@ -17,6 +17,7 @@ public class PTLGameManager : MonoBehaviour
     [SerializeField] private bool gameGoing = false;
     [SerializeField] private GameObject restartButton;
     [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private GameObject instructionScreen;
 
     private void Start()
     {
@@ -128,6 +129,7 @@ public class PTLGameManager : MonoBehaviour
 
     public void StartGame()
     {
+        instructionScreen.SetActive(false);
         gameGoing = true;
         lockpick.gameObject.SetActive(true);
         lockpick.gameObject.transform.rotation = new Quaternion (0, 0, 0, 0);
