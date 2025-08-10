@@ -375,6 +375,7 @@
 -analyzer:"C:/Program Files/Unity 2022.3.17f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/FB Scripts/FBBirdScript.cs"
 "Assets/Scripts/FB Scripts/FBGameManager.cs"
+"Assets/Scripts/FB Scripts/FBPipe.cs"
 "Assets/Scripts/FB Scripts/FBPipeSpawner.cs"
 "Assets/Scripts/PLT Scripts/PTLGameManager.cs"
 "Assets/Scripts/PLT Scripts/PTLLockpick.cs"
