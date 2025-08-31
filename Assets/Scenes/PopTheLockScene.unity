@@ -298,6 +298,7 @@ MonoBehaviour:
   gameGoing: 0
   restartButton: {fileID: 1166842103}
   pauseScreen: {fileID: 1231857677}
+  instructionScreen: {fileID: 0}
 --- !u!4 &238082691
 Transform:
   m_ObjectHideFlags: 0

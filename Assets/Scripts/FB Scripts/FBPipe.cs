@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class FBPipe : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private int targetXPosition = -10;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        Vector3 targetPosition = new Vector3(targetXPosition, transform.position.y, transform.position.z);
+        this.transform.position = Vector3.MoveTowards(this.transform.position, targetPosition, Time.deltaTime);
+        if (this.transform.position == targetPosition) Destroy(this.gameObject);
     }
 }
