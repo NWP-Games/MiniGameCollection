@@ -18,6 +18,7 @@ public class PTLGameManager : MonoBehaviour
     [SerializeField] private GameObject restartButton;
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private GameObject instructionScreen;
+    [SerializeField] private GameObject menuButton;
 
     private void Start()
     {
@@ -116,6 +117,7 @@ public class PTLGameManager : MonoBehaviour
         lockpick.SetGameGoing(gameGoing);
         lockpick.gameObject.SetActive(false);
         restartButton.SetActive(true);
+        menuButton.SetActive(true);
 
         GameObject[] allActiveGameObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
         foreach (GameObject gameObject in allActiveGameObjects)
@@ -130,6 +132,7 @@ public class PTLGameManager : MonoBehaviour
     public void StartGame()
     {
         instructionScreen.SetActive(false);
+        menuButton.SetActive(false);
         gameGoing = true;
         lockpick.gameObject.SetActive(true);
         lockpick.gameObject.transform.rotation = new Quaternion (0, 0, 0, 0);
@@ -153,15 +156,22 @@ public class PTLGameManager : MonoBehaviour
         gameGoing = false;
         lockpick.SetGameGoing(gameGoing);
         pauseScreen.SetActive(true);
+        menuButton.SetActive(true);
     }
 
     public void UnpauseGame()
     {
         pauseScreen.SetActive(false);
-        if(lives > 0)
+        menuButton.SetActive(false);
+        if (lives > 0)
         {
             gameGoing = true;
             lockpick.SetGameGoing(gameGoing);
         }
+    }
+
+    public void ReturnToMainPage()
+    {
+        SceneLoader.Load(SceneLoader.Scene.MainPage);
     }
 }

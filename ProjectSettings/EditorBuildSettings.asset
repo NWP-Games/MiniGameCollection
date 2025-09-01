@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PopTheLockScene.unity
     guid: 9fef82235c03e354290d5c05091bc797
+  - enabled: 1
+    path: Assets/Scenes/FlappyBirdScene.unity
+    guid: 8f12bb21704515f46a265aaab77ad414
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: dde42f07de4d11346b5b5130831004a3
   m_configObjects: {}

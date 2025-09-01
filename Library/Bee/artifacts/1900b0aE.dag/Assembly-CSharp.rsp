@@ -377,9 +377,12 @@
 "Assets/Scripts/FB Scripts/FBGameManager.cs"
 "Assets/Scripts/FB Scripts/FBPipe.cs"
 "Assets/Scripts/FB Scripts/FBPipeSpawner.cs"
+"Assets/Scripts/GameManager.cs"
 "Assets/Scripts/PLT Scripts/PTLGameManager.cs"
 "Assets/Scripts/PLT Scripts/PTLLockpick.cs"
 "Assets/Scripts/PLT Scripts/PTLUnlockPoint.cs"
+"Assets/Scripts/SceneLoader.cs"
+"Assets/Scripts/SceneLoaderCallback.cs"
 -langversion:9.0
 
 /deterministic

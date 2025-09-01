@@ -61,10 +61,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\FB Scripts\FBGameManager.cs" />
+    <Compile Include="Assets\Scripts\SceneLoaderCallback.cs" />
     <Compile Include="Assets\Scripts\FB Scripts\FBPipeSpawner.cs" />
     <Compile Include="Assets\Scripts\PLT Scripts\PTLUnlockPoint.cs" />
     <Compile Include="Assets\Scripts\FB Scripts\FBBirdScript.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\PLT Scripts\PTLLockpick.cs" />
+    <Compile Include="Assets\Scripts\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\PLT Scripts\PTLGameManager.cs" />
     <Compile Include="Assets\Scripts\FB Scripts\FBPipe.cs" />
   </ItemGroup>

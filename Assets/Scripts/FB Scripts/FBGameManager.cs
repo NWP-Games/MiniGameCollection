@@ -13,6 +13,7 @@ public class FBGameManager : MonoBehaviour
     [SerializeField] private GameObject restartButton;
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private GameObject instructionScreen;
+    [SerializeField] private GameObject menuButton;
 
     private void Update()
     {
@@ -29,6 +30,7 @@ public class FBGameManager : MonoBehaviour
     {
         pipeSpawner.DestoryPipes();
         instructionScreen.SetActive(false);
+        menuButton.SetActive(false);
         score = 0;
         bird.SetIsAlive(true);
         bird.SetIsGameGoing(false);
@@ -48,6 +50,7 @@ public class FBGameManager : MonoBehaviour
         pipeSpawner.SetIsGameGoing(false);
         //pauseScreen.SetActive(true);
         restartButton.SetActive(true);
+        menuButton.SetActive(true);
     }
 
     public void Score() 
@@ -71,6 +74,7 @@ public class FBGameManager : MonoBehaviour
         pauseScreen.SetActive(true);
         //pipeSpawner.SetIsGameGoing(gameGoing);
         pipeSpawner.gameObject.SetActive(gameGoing);
+        menuButton.SetActive(true);
     }
 
     public void UnpauseGame()
@@ -82,6 +86,12 @@ public class FBGameManager : MonoBehaviour
             bird.SetIsGameGoing(gameGoing);
             //pipeSpawner.SetIsGameGoing(gameGoing);
             pipeSpawner.gameObject.SetActive(gameGoing);
+            menuButton.SetActive(false);
         }
+    }
+
+    public void ReturnToMainPage()
+    {
+        SceneLoader.Load(SceneLoader.Scene.MainPage);
     }
 }
