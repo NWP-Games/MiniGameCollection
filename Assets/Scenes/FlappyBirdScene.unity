@@ -2057,7 +2057,7 @@ MonoBehaviour:
   pipe: {fileID: 6814526210690166124, guid: 4df165ecaa68cbd4d9266233b19778d8, type: 3}
   spawnInterval: 5
   timer: 0
-  heightVariationBounds: 4
+  heightVariationBounds: 3.5
   isGameGoing: 0
 --- !u!1 &1702541974
 GameObject:

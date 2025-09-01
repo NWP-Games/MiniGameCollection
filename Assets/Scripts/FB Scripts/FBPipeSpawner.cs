@@ -8,7 +8,7 @@ public class FBPipeSpawner : MonoBehaviour
     [SerializeField] private GameObject pipe;
     [SerializeField] private int spawnInterval = 3;
     [SerializeField] private float timer = 0f;
-    [SerializeField] private float heightVariationBounds = 4f;
+    [SerializeField] private float heightVariationBounds = 3.5f;
     [SerializeField] private bool isGameGoing = false;
 
     private void Start()

@@ -26,6 +26,17 @@ public class FBBirdScript : MonoBehaviour
         {
             rb.AddForce(flapVector, ForceMode2D.Impulse);
         }
+
+        if(Input.GetKey(KeyCode.Space))
+        {
+            wingUp.SetActive(false);
+            wingDown.SetActive(true);
+        }
+        else
+        {
+            wingUp.SetActive(true);
+            wingDown.SetActive(false);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
